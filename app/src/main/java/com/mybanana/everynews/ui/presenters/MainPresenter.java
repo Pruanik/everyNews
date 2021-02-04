@@ -21,9 +21,15 @@ public class MainPresenter {
     }
 
     private void loadNews(){
+        view.showProgress();
+
         model.getNews(new NewsModel.ViewAction(){
             public void updateNews(List<News> news){
+                view.hideProgress();
                 view.showNews(news);
+            }
+            public void notification(String message){
+                view.showNotification(message);
             }
         });
     }

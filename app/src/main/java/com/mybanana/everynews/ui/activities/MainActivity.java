@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.mybanana.everynews.R;
 import com.mybanana.everynews.adapters.NewsRecycleAdapter;
@@ -19,6 +21,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ProgressBar progressBar;
     private RecyclerView newsRecycleView;
     private NewsRecycleAdapter newsRecycleAdapter;
     private MainPresenter presenter;
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void init(){
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         newsRecycleView = (RecyclerView) findViewById(R.id.news_recycler);
         newsRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -52,14 +56,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showProgress(){
-
+        progressBar.setVisibility(ProgressBar.VISIBLE);
     }
 
     public void hideProgress(){
-
+        progressBar.setVisibility(ProgressBar.INVISIBLE);
     }
 
     public void showNotification(String message){
-
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

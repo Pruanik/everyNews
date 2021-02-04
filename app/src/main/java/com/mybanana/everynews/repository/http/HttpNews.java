@@ -1,7 +1,5 @@
 package com.mybanana.everynews.repository.http;
 
-import android.util.Log;
-
 import com.mybanana.everynews.adapters.items.News;
 import com.mybanana.everynews.lib.retrofit.RetrofitClient;
 import com.mybanana.everynews.models.NewsModel;
@@ -33,16 +31,16 @@ public class HttpNews implements BaseNewsRepository {
             @Override
             public void onResponse(Call<NewsPackage> call, Response<NewsPackage> response) {
                 if (response.isSuccessful()) {
-                    Log.d("RETR", String.valueOf(response.body().totalResults));
+                    action.notification("Всего загружено " + response.body().totalResults + "шт. статей");
                     action.updateNews(response.body().news);
                 } else {
-                    Log.d("RETR", String.valueOf(response.code()));
+                    action.notification("Ошибка, код: " + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<NewsPackage> call, Throwable t) {
-                Log.d("RETR","failure " + t);
+                action.notification("Ошибка соединения, попробуйте позже");
             }
         });
     }

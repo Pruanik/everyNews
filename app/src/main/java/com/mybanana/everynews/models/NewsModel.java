@@ -18,5 +18,6 @@ public class NewsModel {
 
     public abstract static class ViewAction{
         public void updateNews(List<News> news){}
+        public void notification(String message){}
     }
 }
