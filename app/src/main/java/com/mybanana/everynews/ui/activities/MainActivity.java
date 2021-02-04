@@ -3,6 +3,7 @@ package com.mybanana.everynews.ui.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
+    private SwipeRefreshLayout swipeRefresh;
     private RecyclerView newsRecycleView;
     private NewsRecycleAdapter newsRecycleAdapter;
     private MainPresenter presenter;
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void init(){
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+        swipeRefresh.setOnRefreshListener(swipeRefreshAction);
         newsRecycleView = (RecyclerView) findViewById(R.id.news_recycler);
         newsRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -63,7 +67,18 @@ public class MainActivity extends AppCompatActivity {
         progressBar.setVisibility(ProgressBar.INVISIBLE);
     }
 
+    public void hideRefreshProgress(){
+        swipeRefresh.setRefreshing(false);
+    }
+
     public void showNotification(String message){
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
+
+    SwipeRefreshLayout.OnRefreshListener swipeRefreshAction = new SwipeRefreshLayout.OnRefreshListener(){
+        @Override
+        public void onRefresh() {
+            presenter.onRefresh();
+        }
+    };
 }
