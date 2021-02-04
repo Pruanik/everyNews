@@ -11,6 +11,7 @@ import com.mybanana.everynews.R;
 import com.mybanana.everynews.adapters.NewsRecycleAdapter;
 import com.mybanana.everynews.adapters.items.News;
 import com.mybanana.everynews.models.NewsModel;
+import com.mybanana.everynews.repository.http.HttpNews;
 import com.mybanana.everynews.repository.stub.StubNews;
 import com.mybanana.everynews.ui.presenters.MainPresenter;
 
@@ -35,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
         newsRecycleView = (RecyclerView) findViewById(R.id.news_recycler);
         newsRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
-//        HttpNews httpNews = new HttpNews();
-        StubNews stub = new StubNews();
-        NewsModel model = new NewsModel(stub);
+        //StubNews newsRepository = new StubNews();
+        HttpNews newsRepository = new HttpNews();
+        NewsModel model = new NewsModel(newsRepository);
         presenter = new MainPresenter(this, model);
     }
 

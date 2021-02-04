@@ -2,7 +2,6 @@ package com.mybanana.everynews.models;
 
 import com.mybanana.everynews.adapters.items.News;
 import com.mybanana.everynews.repository.BaseNewsRepository;
-import com.mybanana.everynews.repository.http.HttpNews;
 
 import java.util.List;
 
@@ -13,7 +12,11 @@ public class NewsModel {
         this.repository = repository;
     }
 
-    public List<News> getNews(){
-        return repository.getNews();
+    public void getNews(ViewAction action) {
+        repository.updateNews(action);
+    }
+
+    public abstract static class ViewAction{
+        public void updateNews(List<News> news){}
     }
 }

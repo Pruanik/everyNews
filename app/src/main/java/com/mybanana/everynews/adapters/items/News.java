@@ -1,21 +1,30 @@
 package com.mybanana.everynews.adapters.items;
 
+import com.squareup.moshi.Json;
+
 public class News {
 
-    public String author;
-    public String title;
-    public String description;
-    public String link;
-    public String imgLink;
-    public String publishedAt;
-    public String content;
+    @Json(name = "author")
+    private String author;
+    @Json(name = "title")
+    private String title;
+    @Json(name = "description")
+    private String description;
+    @Json(name = "url")
+    private String url;
+    @Json(name = "urlToImage")
+    private String urlToImage;
+    @Json(name = "publishedAt")
+    private String publishedAt;
+    @Json(name = "content")
+    private String content;
 
-    public News(String author, String title, String description, String link, String imgLink, String publishedAt, String content) {
+    public News(String author, String title, String description, String url, String urlToImage, String publishedAt, String content) {
         this.author = author;
         this.title = title;
         this.description = description;
-        this.link = link;
-        this.imgLink = imgLink;
+        this.url = url;
+        this.urlToImage = urlToImage;
         this.publishedAt = publishedAt;
         this.content = content;
     }
@@ -44,20 +53,20 @@ public class News {
         this.description = description;
     }
 
-    public String getLink() {
-        return link;
+    public String getUrl() {
+        return url;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String getImgLink() {
-        return imgLink;
+    public String getUrlToImage() {
+        return urlToImage;
     }
 
-    public void setImgLink(String imgLink) {
-        this.imgLink = imgLink;
+    public void setUrlToImage(String urlToImage) {
+        this.urlToImage = urlToImage;
     }
 
     public String getPublishedAt() {

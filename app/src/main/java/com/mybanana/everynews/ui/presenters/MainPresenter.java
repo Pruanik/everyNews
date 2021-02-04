@@ -1,7 +1,5 @@
 package com.mybanana.everynews.ui.presenters;
 
-import android.util.Log;
-
 import com.mybanana.everynews.adapters.items.News;
 import com.mybanana.everynews.models.NewsModel;
 import com.mybanana.everynews.ui.activities.MainActivity;
@@ -23,7 +21,10 @@ public class MainPresenter {
     }
 
     private void loadNews(){
-        List<News> news = model.getNews();
-        view.showNews(news);
+        model.getNews(new NewsModel.ViewAction(){
+            public void updateNews(List<News> news){
+                view.showNews(news);
+            }
+        });
     }
 }
