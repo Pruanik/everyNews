@@ -1,6 +1,5 @@
 package com.mybanana.everynews.adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mybanana.everynews.R;
 import com.mybanana.everynews.adapters.items.News;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,13 +35,12 @@ public class NewsRecycleAdapter extends RecyclerView.Adapter<NewsRecycleAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NewsRecycleAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         News item = newsList.get(position);
 
-        //holder.image.setImageResource();
+        Picasso.get().load(item.getUrlToImage()).into(holder.image);
         holder.title.setText(item.getTitle());
         holder.description.setText(item.getDescription());
-        holder.publishedAt.setText(item.getPublishedAt());
     }
 
     @Override
@@ -53,7 +52,6 @@ public class NewsRecycleAdapter extends RecyclerView.Adapter<NewsRecycleAdapter.
         public ImageView image;
         public TextView title;
         public TextView description;
-        public TextView publishedAt;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,7 +59,6 @@ public class NewsRecycleAdapter extends RecyclerView.Adapter<NewsRecycleAdapter.
             image = (ImageView) itemView.findViewById(R.id.item_news_img);
             title = (TextView) itemView.findViewById(R.id.item_news_title);
             description = (TextView) itemView.findViewById(R.id.item_news_description);
-            publishedAt = (TextView) itemView.findViewById(R.id.item_news_published_at);
         }
     }
 
