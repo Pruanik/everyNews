@@ -63,10 +63,12 @@ public class NewsRecycleAdapter extends RecyclerView.Adapter<NewsRecycleAdapter.
     }
 
     public void add(List<News> news){
+        newsList.clear();
         for(News newsItem: news){
             if(!newsList.contains(newsItem)){
                 newsList.add(newsItem);
             }
         }
+        notifyDataSetChanged();
     }
 }

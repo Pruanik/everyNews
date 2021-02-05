@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">EveryNews</string>
+    <string name="search">Поиск</string>
 </resources>

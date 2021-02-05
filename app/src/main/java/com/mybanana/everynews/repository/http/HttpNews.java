@@ -1,5 +1,7 @@
 package com.mybanana.everynews.repository.http;
 
+import android.util.Log;
+
 import com.mybanana.everynews.adapters.items.News;
 import com.mybanana.everynews.lib.retrofit.RetrofitClient;
 import com.mybanana.everynews.models.NewsModel;
@@ -26,6 +28,29 @@ public class HttpNews implements BaseNewsRepository {
     public void updateNews(NewsModel.ViewAction action) {
 
         Call<NewsPackage> call = newsClient.getTopHeadlineNews("us", "business");
+
+        call.enqueue(new Callback<NewsPackage>() {
+            @Override
+            public void onResponse(Call<NewsPackage> call, Response<NewsPackage> response) {
+                if (response.isSuccessful()) {
+                    action.notification("Всего загружено " + response.body().totalResults + "шт. статей");
+                    action.updateNews(response.body().news);
+                } else {
+                    action.notification("Ошибка, код: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewsPackage> call, Throwable t) {
+                action.notification("Ошибка соединения, попробуйте позже");
+            }
+        });
+    }
+
+    @Override
+    public void searchNews(String query, NewsModel.ViewAction action) {
+        Log.d("REPHTTPAPI", query);
+        Call<NewsPackage> call = newsClient.searchNews(query);
 
         call.enqueue(new Callback<NewsPackage>() {
             @Override

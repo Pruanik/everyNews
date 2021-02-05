@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface BaseNewsRepository {
     public void updateNews(NewsModel.ViewAction action);
+    public void searchNews(String query, NewsModel.ViewAction action);
 }

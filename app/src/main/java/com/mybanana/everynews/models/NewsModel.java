@@ -1,5 +1,7 @@
 package com.mybanana.everynews.models;
 
+import android.util.Log;
+
 import com.mybanana.everynews.adapters.items.News;
 import com.mybanana.everynews.repository.BaseNewsRepository;
 
@@ -15,9 +17,13 @@ public class NewsModel {
     public void getNews(ViewAction action) {
         repository.updateNews(action);
     }
+    public void searchNews(String query, ViewAction action) {
+        Log.d("MODELNEWS", query);
+        repository.searchNews(query, action);
+    }
 
     public abstract static class ViewAction{
-        public void updateNews(List<News> news){}
-        public void notification(String message){}
+        public abstract void updateNews(List<News> news);
+        public abstract void notification(String message);
     }
 }

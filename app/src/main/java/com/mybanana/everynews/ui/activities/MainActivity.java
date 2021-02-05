@@ -8,6 +8,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.mybanana.everynews.R;
@@ -23,6 +24,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
+    private SearchView search;
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView newsRecycleView;
     private NewsRecycleAdapter newsRecycleAdapter;
@@ -39,8 +41,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void init(){
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+
+        search = (SearchView) findViewById(R.id.search_bar);
+        search.setOnQueryTextListener(searchAction);
+
         swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         swipeRefresh.setOnRefreshListener(swipeRefreshAction);
+
         newsRecycleView = (RecyclerView) findViewById(R.id.news_recycler);
         newsRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -79,6 +86,19 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onRefresh() {
             presenter.onRefresh();
+        }
+    };
+
+    SearchView.OnQueryTextListener searchAction = new SearchView.OnQueryTextListener(){
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            presenter.onSearch(query);
+            return false;
+        }
+
+        @Override
+        public boolean onQueryTextChange(String newText) {
+            return false;
         }
     };
 }

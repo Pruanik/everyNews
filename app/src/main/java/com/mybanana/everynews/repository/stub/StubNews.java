@@ -17,4 +17,9 @@ public class StubNews implements BaseNewsRepository {
 
         action.updateNews(news);
     }
+
+    @Override
+    public void searchNews(String query, NewsModel.ViewAction action) {
+        action.updateNews(new ArrayList<>());
+    }
 }

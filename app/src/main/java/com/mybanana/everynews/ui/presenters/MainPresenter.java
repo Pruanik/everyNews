@@ -1,5 +1,7 @@
 package com.mybanana.everynews.ui.presenters;
 
+import android.util.Log;
+
 import com.mybanana.everynews.adapters.items.News;
 import com.mybanana.everynews.models.NewsModel;
 import com.mybanana.everynews.ui.activities.MainActivity;
@@ -34,6 +36,21 @@ public class MainPresenter {
         model.getNews(new NewsModel.ViewAction(){
             public void updateNews(List<News> news){
                 view.hideRefreshProgress();
+                view.showNews(news);
+            }
+            public void notification(String message){
+                view.showNotification(message);
+            }
+        });
+    }
+
+    public void onSearch(String query){
+        view.showProgress();
+
+        Log.d("PRESENTER", query);
+        model.searchNews(query, new NewsModel.ViewAction(){
+            public void updateNews(List<News> news){
+                view.hideProgress();
                 view.showNews(news);
             }
             public void notification(String message){
