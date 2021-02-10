@@ -1,4 +1,4 @@
-package com.mybanana.everynews.lib.retrofit;
+package com.mybanana.everynews.drivers.http;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 
-public class RetrofitClient {
+public class Client {
     private static Retrofit restClient;
     private static String apiKey = "9af25dbbf46c4615b6c53fbdcf226425";
 

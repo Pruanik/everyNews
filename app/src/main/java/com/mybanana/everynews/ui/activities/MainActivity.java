@@ -1,34 +1,33 @@
 package com.mybanana.everynews.ui.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.mybanana.everynews.R;
-import com.mybanana.everynews.adapters.NewsRecycleAdapter;
-import com.mybanana.everynews.adapters.items.News;
-import com.mybanana.everynews.models.NewsModel;
-import com.mybanana.everynews.repository.http.HttpNews;
-import com.mybanana.everynews.repository.stub.StubNews;
-import com.mybanana.everynews.ui.presenters.MainPresenter;
+import com.mybanana.everynews.ui.adapters.NewsRecycleAdapter;
+import com.mybanana.everynews.app.models.News;
+import com.mybanana.everynews.ui.views.MainView;
+import com.mybanana.everynews.app.presenters.MainPresenter;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends MvpAppCompatActivity implements MainView {
+    @InjectPresenter
+    public MainPresenter presenter;
 
     private ProgressBar progressBar;
     private SearchView search;
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView newsRecycleView;
     private NewsRecycleAdapter newsRecycleAdapter;
-    private MainPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
         newsRecycleView = (RecyclerView) findViewById(R.id.news_recycler);
         newsRecycleView.setLayoutManager(new LinearLayoutManager(this));
-
-        //StubNews newsRepository = new StubNews();
-        HttpNews newsRepository = new HttpNews();
-        NewsModel model = new NewsModel(newsRepository);
-        presenter = new MainPresenter(this, model);
     }
 
-    public void showNews(List<News> news){
+    public void setNews(List<News> news){
         if(newsRecycleAdapter == null){
             newsRecycleAdapter = new NewsRecycleAdapter();
             newsRecycleView.setAdapter(newsRecycleAdapter);

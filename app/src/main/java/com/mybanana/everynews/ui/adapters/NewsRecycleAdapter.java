@@ -1,4 +1,4 @@
-package com.mybanana.everynews.adapters;
+package com.mybanana.everynews.ui.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mybanana.everynews.R;
-import com.mybanana.everynews.adapters.items.News;
+import com.mybanana.everynews.app.models.News;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

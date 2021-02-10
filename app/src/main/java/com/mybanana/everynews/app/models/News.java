@@ -1,4 +1,4 @@
-package com.mybanana.everynews.adapters.items;
+package com.mybanana.everynews.app.models;
 
 import com.squareup.moshi.Json;
 
