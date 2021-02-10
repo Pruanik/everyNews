@@ -23,6 +23,6 @@ public class NewsRepositoryImpl implements NewsRepository {
 
     @Override
     public void searchNews(String query, CallbackAction<News> action) {
-
+        httpService.searchNews(query, action);
     }
 }
