@@ -2,6 +2,7 @@ package com.mybanana.everynews.app.presenters;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.mybanana.everynews.app.EveryNewsApp;
 import com.mybanana.everynews.app.contracts.CallbackAction;
 import com.mybanana.everynews.app.models.News;
 import com.mybanana.everynews.app.repositories.NewsRepository;
@@ -13,12 +14,11 @@ import javax.inject.Inject;
 
 @InjectViewState
 public class MainPresenter extends MvpPresenter<MainView> {
-
-    private final NewsRepository<News> repository;
-
     @Inject
-    public MainPresenter(NewsRepository<News> repository){
-        this.repository = repository;
+    public NewsRepository repository;
+
+    public MainPresenter(){
+        EveryNewsApp.getAppComponent().inject(this);
     }
 
     public void onCreate(){

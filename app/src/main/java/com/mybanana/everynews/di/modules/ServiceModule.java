@@ -5,7 +5,7 @@ import com.mybanana.everynews.app.services.impl.NewsHttpServiceImpl;
 
 import dagger.Module;
 import dagger.Provides;
- 
+
 @Module
 public class ServiceModule {
     @Provides

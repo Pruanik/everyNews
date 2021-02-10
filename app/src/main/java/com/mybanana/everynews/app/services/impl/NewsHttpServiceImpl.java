@@ -1,5 +1,6 @@
 package com.mybanana.everynews.app.services.impl;
 
+import com.mybanana.everynews.app.EveryNewsApp;
 import com.mybanana.everynews.app.contracts.CallbackAction;
 import com.mybanana.everynews.app.models.News;
 import com.mybanana.everynews.app.models.NewsPackage;
@@ -15,6 +16,10 @@ import retrofit2.Response;
 public class NewsHttpServiceImpl implements NewsHttpService {
     @Inject
     public NewsApi newsClient;
+
+    public NewsHttpServiceImpl(){
+        EveryNewsApp.getAppComponent().inject(this);
+    }
 
     @Override
     public void updateNews(CallbackAction<News> action) {
