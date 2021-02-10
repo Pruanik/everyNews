@@ -1,26 +1,20 @@
-package com.mybanana.everynews.drivers.http;
-
-import android.util.Log;
+package com.mybanana.everynews.app.services.impl;
 
 import com.mybanana.everynews.app.contracts.CallbackAction;
-import com.mybanana.everynews.app.contracts.ItemsHttpClient;
 import com.mybanana.everynews.app.models.News;
 import com.mybanana.everynews.app.models.NewsPackage;
-import com.mybanana.everynews.drivers.http.api.NewsApi;
+import com.mybanana.everynews.api.NewsApi;
+import com.mybanana.everynews.app.services.NewsHttpService;
+
+import javax.inject.Inject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
-public class NewsClient implements ItemsHttpClient {
-    private Retrofit retrofit;
-    private NewsApi newsClient;
-
-    public NewsClient(){
-        retrofit = Client.getClient();
-        newsClient = retrofit.create(NewsApi.class);
-    }
+public class NewsHttpServiceImpl implements NewsHttpService {
+    @Inject
+    public NewsApi newsClient;
 
     @Override
     public void updateNews(CallbackAction<News> action) {
@@ -47,7 +41,6 @@ public class NewsClient implements ItemsHttpClient {
 
     @Override
     public void searchNews(String query, CallbackAction<News> action) {
-        Log.d("REPHTTPAPI", query);
         Call<NewsPackage> call = newsClient.searchNews(query);
 
         call.enqueue(new Callback<NewsPackage>() {

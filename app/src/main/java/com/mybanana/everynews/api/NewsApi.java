@@ -1,4 +1,4 @@
-package com.mybanana.everynews.drivers.http.api;
+package com.mybanana.everynews.api;
 
 import com.mybanana.everynews.app.models.NewsPackage;
 
