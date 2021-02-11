@@ -16,21 +16,21 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsRecycleAdapter extends RecyclerView.Adapter<NewsRecycleAdapter.ViewHolder> {
+public class MainNewsVerticalRecycleAdapter extends RecyclerView.Adapter<MainNewsVerticalRecycleAdapter.ViewHolder> {
     private List<News> newsList;
 
-    public NewsRecycleAdapter() {
+    public MainNewsVerticalRecycleAdapter() {
         newsList = new ArrayList<>();
     }
 
-    public NewsRecycleAdapter(List<News> news){
+    public MainNewsVerticalRecycleAdapter(List<News> news){
         this.newsList = news;
     }
 
     @NonNull
     @Override
-    public NewsRecycleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news, parent, false);
+    public MainNewsVerticalRecycleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_vertical_news, parent, false);
         return new ViewHolder(view);
     }
 
