@@ -16,21 +16,21 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainNewsVerticalRecycleAdapter extends RecyclerView.Adapter<MainNewsVerticalRecycleAdapter.ViewHolder> {
+public class TrendingNewsRecycleAdapter extends RecyclerView.Adapter<TrendingNewsRecycleAdapter.ViewHolder> {
     private List<News> newsList;
 
-    public MainNewsVerticalRecycleAdapter() {
+    public TrendingNewsRecycleAdapter() {
         newsList = new ArrayList<>();
     }
 
-    public MainNewsVerticalRecycleAdapter(List<News> news){
+    public TrendingNewsRecycleAdapter(List<News> news){
         this.newsList = news;
     }
 
     @NonNull
     @Override
-    public MainNewsVerticalRecycleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_vertical_news, parent, false);
+    public TrendingNewsRecycleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_horizontal_news, parent, false);
         return new ViewHolder(view);
     }
 
@@ -39,8 +39,7 @@ public class MainNewsVerticalRecycleAdapter extends RecyclerView.Adapter<MainNew
         News item = newsList.get(position);
 
         Picasso.get().load(item.getUrlToImage()).into(holder.image);
-        holder.title.setText(item.getTitle());
-        holder.description.setText(item.getDescription());
+        holder.title.setText(item.getTitle().substring(0, 45) + "..");
     }
 
     @Override
@@ -51,14 +50,12 @@ public class MainNewsVerticalRecycleAdapter extends RecyclerView.Adapter<MainNew
     public class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView image;
         public TextView title;
-        public TextView description;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             image = (ImageView) itemView.findViewById(R.id.item_news_img);
             title = (TextView) itemView.findViewById(R.id.item_news_title);
-            description = (TextView) itemView.findViewById(R.id.item_news_description);
         }
     }
 

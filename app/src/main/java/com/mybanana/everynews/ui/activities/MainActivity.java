@@ -12,8 +12,8 @@ import android.widget.Toast;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.mybanana.everynews.R;
-import com.mybanana.everynews.ui.adapters.MainNewsHorizontalRecycleAdapter;
-import com.mybanana.everynews.ui.adapters.MainNewsVerticalRecycleAdapter;
+import com.mybanana.everynews.ui.adapters.TrendingNewsRecycleAdapter;
+import com.mybanana.everynews.ui.adapters.MainNewsRecycleAdapter;
 import com.mybanana.everynews.app.models.News;
 import com.mybanana.everynews.ui.views.MainView;
 import com.mybanana.everynews.app.presenters.MainPresenter;
@@ -27,10 +27,10 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     private ProgressBar progressBar;
     private SearchView search;
     private SwipeRefreshLayout swipeRefresh;
-    private RecyclerView newsRecycleViewVertical;
-    private RecyclerView newsRecycleViewHorizontal;
-    private MainNewsVerticalRecycleAdapter newsVerticalAdapter;
-    private MainNewsHorizontalRecycleAdapter newsHorizontalAdapter;
+    private RecyclerView mainNewsRecyclerView;
+    private RecyclerView trendingNewsRecyclerView;
+    private MainNewsRecycleAdapter mainNewsAdapter;
+    private TrendingNewsRecycleAdapter trendingNewsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,27 +50,29 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 //        swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
 //        swipeRefresh.setOnRefreshListener(swipeRefreshAction);
 
-        newsRecycleViewHorizontal = (RecyclerView) findViewById(R.id.news_recycler_horizontal);
-        newsRecycleViewHorizontal.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        trendingNewsRecyclerView = (RecyclerView) findViewById(R.id.news_recycler_horizontal);
+        trendingNewsRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        newsRecycleViewVertical = (RecyclerView) findViewById(R.id.news_recycler_vertical);
-        newsRecycleViewVertical.setLayoutManager(new LinearLayoutManager(this));
+        mainNewsRecyclerView = (RecyclerView) findViewById(R.id.news_recycler_vertical);
+        mainNewsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    public void setNews(List<News> news){
-        if(newsHorizontalAdapter == null){
-            newsHorizontalAdapter = new MainNewsHorizontalRecycleAdapter();
-            newsRecycleViewHorizontal.setAdapter(newsHorizontalAdapter);
+    public void setNewsList(List<News> news){
+        if(mainNewsAdapter == null){
+            mainNewsAdapter = new MainNewsRecycleAdapter();
+            mainNewsRecyclerView.setAdapter(mainNewsAdapter);
         }
 
-        newsHorizontalAdapter.add(news);
+        mainNewsAdapter.add(news);
+    }
 
-        if(newsVerticalAdapter == null){
-            newsVerticalAdapter = new MainNewsVerticalRecycleAdapter();
-            newsRecycleViewVertical.setAdapter(newsVerticalAdapter);
+    public void setTrendingNewsList(List<News> news){
+        if(trendingNewsAdapter == null){
+            trendingNewsAdapter = new TrendingNewsRecycleAdapter();
+            trendingNewsRecyclerView.setAdapter(trendingNewsAdapter);
         }
 
-        newsVerticalAdapter.add(news);
+        trendingNewsAdapter.add(news);
     }
 
     public void showProgress(){

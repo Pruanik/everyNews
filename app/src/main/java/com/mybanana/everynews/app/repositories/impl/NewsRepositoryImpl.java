@@ -1,7 +1,7 @@
 package com.mybanana.everynews.app.repositories.impl;
 
 import com.mybanana.everynews.app.EveryNewsApp;
-import com.mybanana.everynews.app.contracts.CallbackAction;
+import com.mybanana.everynews.app.interactors.NewsCallback;
 import com.mybanana.everynews.app.models.News;
 import com.mybanana.everynews.app.repositories.NewsRepository;
 import com.mybanana.everynews.app.services.NewsHttpService;
@@ -17,12 +17,12 @@ public class NewsRepositoryImpl implements NewsRepository {
     }
 
     @Override
-    public void getNews(CallbackAction<News> action) {
-        httpService.updateNews(action);
+    public void getNews(NewsCallback<News> action) {
+        httpService.updateTrendsNews(action);
     }
 
     @Override
-    public void searchNews(String query, CallbackAction<News> action) {
+    public void searchNews(String query, NewsCallback<News> action) {
         httpService.searchNews(query, action);
     }
 }

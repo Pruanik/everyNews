@@ -9,7 +9,12 @@ import retrofit2.http.Query;
 
 public interface NewsApi {
     @GET("top-headlines")
-    Call<NewsPackage> getTopHeadlineNews(
+    Call<NewsPackage> getTrendsNews(
+            @Query("country") String country
+    );
+
+    @GET("top-headlines")
+    Call<NewsPackage> getCategoryNews(
             @Query("country") String country,
             @Query("category") String category
     );

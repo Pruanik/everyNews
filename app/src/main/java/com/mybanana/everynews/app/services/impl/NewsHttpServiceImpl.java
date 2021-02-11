@@ -1,7 +1,7 @@
 package com.mybanana.everynews.app.services.impl;
 
 import com.mybanana.everynews.app.EveryNewsApp;
-import com.mybanana.everynews.app.contracts.CallbackAction;
+import com.mybanana.everynews.app.interactors.NewsCallback;
 import com.mybanana.everynews.app.models.News;
 import com.mybanana.everynews.app.models.NewsPackage;
 import com.mybanana.everynews.api.NewsApi;
@@ -22,9 +22,9 @@ public class NewsHttpServiceImpl implements NewsHttpService {
     }
 
     @Override
-    public void updateNews(CallbackAction<News> action) {
+    public void updateTrendsNews(NewsCallback<News> action) {
 
-        Call<NewsPackage> call = newsClient.getTopHeadlineNews("us", "business");
+        Call<NewsPackage> call = newsClient.getTrendsNews("us");
 
         call.enqueue(new Callback<NewsPackage>() {
             @Override
@@ -45,7 +45,31 @@ public class NewsHttpServiceImpl implements NewsHttpService {
     }
 
     @Override
-    public void searchNews(String query, CallbackAction<News> action) {
+    public void updateCategoryNews(String category, NewsCallback<News> action) {
+
+        Call<NewsPackage> call = newsClient.getCategoryNews("us", "business");
+
+        call.enqueue(new Callback<NewsPackage>() {
+            @Override
+            public void onResponse(Call<NewsPackage> call, Response<NewsPackage> response) {
+                if (response.isSuccessful()) {
+                    action.showNotification("Всего загружено " + response.body().getTotalResults() + "шт. статей");
+                    action.updateItems(response.body().getNews());
+                } else {
+                    action.showNotification("Ошибка, код: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<NewsPackage> call, Throwable t) {
+                action.showNotification("Ошибка соединения, попробуйте позже");
+            }
+        });
+    }
+
+    @Override
+    public void searchNews(String query, NewsCallback<News> action) {
+
         Call<NewsPackage> call = newsClient.searchNews(query);
 
         call.enqueue(new Callback<NewsPackage>() {

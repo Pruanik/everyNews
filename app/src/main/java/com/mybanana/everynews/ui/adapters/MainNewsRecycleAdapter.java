@@ -16,30 +16,32 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainNewsHorizontalRecycleAdapter extends RecyclerView.Adapter<MainNewsHorizontalRecycleAdapter.ViewHolder> {
+public class MainNewsRecycleAdapter extends RecyclerView.Adapter<MainNewsRecycleAdapter.ViewHolder> {
     private List<News> newsList;
 
-    public MainNewsHorizontalRecycleAdapter() {
+    public MainNewsRecycleAdapter() {
         newsList = new ArrayList<>();
     }
 
-    public MainNewsHorizontalRecycleAdapter(List<News> news){
+    public MainNewsRecycleAdapter(List<News> news){
         this.newsList = news;
     }
 
     @NonNull
     @Override
-    public MainNewsHorizontalRecycleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_horizontal_news, parent, false);
+    public MainNewsRecycleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_vertical_news, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        //TODO: первые две позиции должны биндиться отдельно
         News item = newsList.get(position);
 
         Picasso.get().load(item.getUrlToImage()).into(holder.image);
-        holder.title.setText(item.getTitle().substring(0, 45) + "..");
+        holder.title.setText(item.getTitle());
+        holder.description.setText(item.getDescription());
     }
 
     @Override
@@ -50,12 +52,14 @@ public class MainNewsHorizontalRecycleAdapter extends RecyclerView.Adapter<MainN
     public class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView image;
         public TextView title;
+        public TextView description;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             image = (ImageView) itemView.findViewById(R.id.item_news_img);
             title = (TextView) itemView.findViewById(R.id.item_news_title);
+            description = (TextView) itemView.findViewById(R.id.item_news_description);
         }
     }
 
