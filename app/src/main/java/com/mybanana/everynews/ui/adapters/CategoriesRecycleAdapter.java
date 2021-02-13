@@ -1,8 +1,10 @@
 package com.mybanana.everynews.ui.adapters;
 
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,6 +38,9 @@ public class CategoriesRecycleAdapter extends RecyclerView.Adapter<CategoriesRec
         Category item = categoriesList.get(position);
 
         holder.name.setText(item.getName());
+        if (position == 0){
+            holder.name.setPaintFlags(holder.name.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        }
     }
 
     @Override
@@ -44,12 +49,12 @@ public class CategoriesRecycleAdapter extends RecyclerView.Adapter<CategoriesRec
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView name;
+        public Button name;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            name = (TextView) itemView.findViewById(R.id.item_category_name);
+            name = (Button) itemView.findViewById(R.id.item_category_name);
         }
     }
 
