@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="20dp"
     android:layout_height="200dp"
-    android:layout_width="300dp">
+    android:layout_width="300dp"
+    android:background="@drawable/rounded">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
