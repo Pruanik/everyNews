@@ -17,8 +17,13 @@ public class NewsRepositoryImpl implements NewsRepository {
     }
 
     @Override
-    public void getNews(NewsCallback<News> action) {
+    public void updateTrendsNews(NewsCallback<News> action) {
         httpService.updateTrendsNews(action);
+    }
+
+    @Override
+    public void updateCategoryNews(String category, NewsCallback<News> action) {
+        httpService.updateCategoryNews(category, action);
     }
 
     @Override

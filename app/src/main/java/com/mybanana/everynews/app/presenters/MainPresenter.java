@@ -26,17 +26,17 @@ public class MainPresenter extends MvpPresenter<MainView> {
         getViewState().showProgress();
 
         //TODO: обновлять две вьюхи двумя разными апросами
-        repository.getNews(
+        repository.updateTrendsNews(
                 new NewsCallbackImpl(getViewState())
         );
     }
 
     public void onRefresh(){
-        repository.getNews(new NewsCallback<News>(){
+        repository.updateTrendsNews(new NewsCallback<News>(){
             @Override
             public void updateItems(List<News> news) {
                 getViewState().hideRefreshProgress();
-                getViewState().setNewsList(news);
+                getViewState().setCategoriesNewsList(news);
             }
 
             @Override

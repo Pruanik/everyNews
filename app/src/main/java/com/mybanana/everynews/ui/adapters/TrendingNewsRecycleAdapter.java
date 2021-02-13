@@ -23,14 +23,10 @@ public class TrendingNewsRecycleAdapter extends RecyclerView.Adapter<TrendingNew
         newsList = new ArrayList<>();
     }
 
-    public TrendingNewsRecycleAdapter(List<News> news){
-        this.newsList = news;
-    }
-
     @NonNull
     @Override
     public TrendingNewsRecycleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_horizontal_news, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_trending_news, parent, false);
         return new ViewHolder(view);
     }
 
