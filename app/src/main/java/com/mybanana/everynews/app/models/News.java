@@ -4,6 +4,8 @@ import com.squareup.moshi.Json;
 
 public class News {
 
+    @Json(name = "source")
+    private Source source;
     @Json(name = "author")
     private String author;
     @Json(name = "title")
@@ -19,7 +21,7 @@ public class News {
     @Json(name = "content")
     private String content;
 
-    public News(String author, String title, String description, String url, String urlToImage, String publishedAt, String content) {
+    public News(String author, String title, String description, String url, String urlToImage, String publishedAt, String content, Source source) {
         this.author = author;
         this.title = title;
         this.description = description;
@@ -27,6 +29,7 @@ public class News {
         this.urlToImage = urlToImage;
         this.publishedAt = publishedAt;
         this.content = content;
+        this.source = source;
     }
 
     public String getAuthor() {
@@ -83,5 +86,13 @@ public class News {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Source getSource() {
+        return source;
+    }
+
+    public void setSource(Source source) {
+        this.source = source;
     }
 }

@@ -16,6 +16,8 @@ import com.mybanana.everynews.app.models.Category;
 import com.mybanana.everynews.app.models.News;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -132,8 +134,14 @@ public class MainNewsRecycleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                     .error(R.drawable.default_image)
                     .into(viewHolder.image);
 
-            viewHolder.title.setText(item.getTitle());
-            viewHolder.description.setText(item.getDescription());
+            viewHolder.source.setText(item.getSource().getName());
+            viewHolder.author.setText(item.getAuthor());
+
+            if(item.getTitle().length() > 90) {
+                viewHolder.title.setText(String.format("%s..", item.getTitle().substring(0, 90)));
+            } else {
+                viewHolder.title.setText(item.getTitle());
+            }
         }
     }
 
@@ -175,14 +183,16 @@ public class MainNewsRecycleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public class ViewHolderCategoryNews extends RecyclerView.ViewHolder{
         public ImageView image;
         public TextView title;
-        public TextView description;
+        public TextView source;
+        public TextView author;
 
         public ViewHolderCategoryNews(@NonNull View itemView) {
             super(itemView);
 
             image = (ImageView) itemView.findViewById(R.id.item_news_img);
             title = (TextView) itemView.findViewById(R.id.item_news_title);
-            description = (TextView) itemView.findViewById(R.id.item_news_description);
+            source = (TextView) itemView.findViewById(R.id.item_news_source);
+            author = (TextView) itemView.findViewById(R.id.item_news_author);
         }
     }
 }

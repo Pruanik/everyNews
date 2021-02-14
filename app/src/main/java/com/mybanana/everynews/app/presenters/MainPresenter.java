@@ -35,6 +35,8 @@ public class MainPresenter extends MvpPresenter<MainView> {
         newsRepository.updateTrendsNews(
                 new NewsCallbackImpl(getViewState())
         );
+
+
     }
 
     public void onRefresh(){
