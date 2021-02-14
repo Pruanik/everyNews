@@ -35,7 +35,11 @@ public class TrendingNewsRecycleAdapter extends RecyclerView.Adapter<TrendingNew
         News item = newsList.get(position);
 
         Picasso.get().load(item.getUrlToImage()).into(holder.image);
-        holder.title.setText(item.getTitle().substring(0, 45) + "..");
+        if(item.getTitle().length() > 45) {
+            holder.title.setText(String.format("%s..", item.getTitle().substring(0, 45)));
+        } else {
+            holder.title.setText(item.getTitle());
+        }
     }
 
     @Override
@@ -58,7 +62,7 @@ public class TrendingNewsRecycleAdapter extends RecyclerView.Adapter<TrendingNew
     public void add(List<News> news){
         newsList.clear();
         for(News newsItem: news){
-            if(!newsList.contains(newsItem)){
+            if(!newsList.contains(newsItem) && newsList.size() < 5){
                 newsList.add(newsItem);
             }
         }

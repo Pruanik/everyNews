@@ -28,6 +28,7 @@ public class MainNewsRecycleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private static final int LAYOUT_ONE = 0; //первый тип отображения на позиции 0
     private static final int LAYOUT_TWO = 1; //второй тип отображений на позиции 1
     private static final int LAYOUT_THREE = 2; //третий тип отображений на позиции 2
+    private static final int LAYOUT_FOUR = 3; //четвертый тип отображений на позиции 3
 
     public MainNewsRecycleAdapter(Context context) {
         this.context = context;
@@ -61,8 +62,10 @@ public class MainNewsRecycleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 return LAYOUT_ONE;
             case LAYOUT_TWO:
                 return LAYOUT_TWO;
-            default:
+            case LAYOUT_THREE:
                 return LAYOUT_THREE;
+            default:
+                return LAYOUT_FOUR;
         }
     }
 
@@ -73,16 +76,21 @@ public class MainNewsRecycleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         RecyclerView.ViewHolder holder = null;
 
         if(viewType == LAYOUT_ONE){
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler_trending_news, parent, false);
-            holder = new ViewHolderTrendingNews(view);
-        }
-
-        if(viewType == LAYOUT_TWO){
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler_categories, parent, false);
             holder = new ViewHolderCategories(view);
         }
 
+        if(viewType == LAYOUT_TWO){
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler_trending_news, parent, false);
+            holder = new ViewHolderTrendingNews(view);
+        }
+
         if(viewType == LAYOUT_THREE){
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_title_recent_news, parent, false);
+            holder = new ViewHolderTitle(view);
+        }
+
+        if(viewType == LAYOUT_FOUR){
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category_news, parent, false);
             holder = new ViewHolderCategoryNews(view);
         }
@@ -94,14 +102,6 @@ public class MainNewsRecycleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         if(holder.getItemViewType() == LAYOUT_ONE){
-            ViewHolderTrendingNews viewHolder = (ViewHolderTrendingNews) holder;
-
-            viewHolder.trendingNewsRecycler.setAdapter(trendingAdapter);
-            viewHolder.trendingNewsRecycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
-            viewHolder.trendingNewsRecycler.setHasFixedSize(true);
-        }
-
-        if(holder.getItemViewType() == LAYOUT_TWO){
             ViewHolderCategories viewHolder = (ViewHolderCategories) holder;
 
             viewHolder.categoriesRecycler.setAdapter(categoriesAdapter);
@@ -109,10 +109,22 @@ public class MainNewsRecycleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             viewHolder.categoriesRecycler.setHasFixedSize(true);
         }
 
+        if(holder.getItemViewType() == LAYOUT_TWO){
+            ViewHolderTrendingNews viewHolder = (ViewHolderTrendingNews) holder;
+
+            viewHolder.trendingNewsRecycler.setAdapter(trendingAdapter);
+            viewHolder.trendingNewsRecycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+            viewHolder.trendingNewsRecycler.setHasFixedSize(true);
+        }
+
         if(holder.getItemViewType() == LAYOUT_THREE){
+            ViewHolderTitle viewHolder = (ViewHolderTitle) holder;
+        }
+
+        if(holder.getItemViewType() == LAYOUT_FOUR){
             ViewHolderCategoryNews viewHolder = (ViewHolderCategoryNews) holder;
 
-            News item = newsList.get(position - 2);
+            News item = newsList.get(position - 3);
 
             Picasso.get().load(item.getUrlToImage()).into(viewHolder.image);
             viewHolder.title.setText(item.getTitle());
@@ -122,21 +134,11 @@ public class MainNewsRecycleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     @Override
     public int getItemCount() {
-        return newsList.size() + 2;
+        return newsList.size() + 3;
     }
 
 
     //Холдеры на каждый тип элементов
-    public class ViewHolderTrendingNews extends RecyclerView.ViewHolder{
-        public RecyclerView trendingNewsRecycler;
-
-        public ViewHolderTrendingNews(@NonNull View itemView) {
-            super(itemView);
-
-            trendingNewsRecycler = (RecyclerView) itemView.findViewById(R.id.recycler_trending_news);
-        }
-    }
-
     public class ViewHolderCategories extends RecyclerView.ViewHolder{
         public RecyclerView categoriesRecycler;
 
@@ -144,6 +146,24 @@ public class MainNewsRecycleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             super(itemView);
 
             categoriesRecycler = (RecyclerView) itemView.findViewById(R.id.recycler_categories);
+        }
+    }
+
+    public class ViewHolderTitle extends RecyclerView.ViewHolder{
+        public TextView title;
+
+        public ViewHolderTitle(@NonNull View itemView) {
+            super(itemView);
+        }
+    }
+
+    public class ViewHolderTrendingNews extends RecyclerView.ViewHolder{
+        public RecyclerView trendingNewsRecycler;
+
+        public ViewHolderTrendingNews(@NonNull View itemView) {
+            super(itemView);
+
+            trendingNewsRecycler = (RecyclerView) itemView.findViewById(R.id.recycler_trending_news);
         }
     }
 

@@ -4,8 +4,6 @@ import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mybanana.everynews.R;
 import com.mybanana.everynews.app.models.Category;
-import com.mybanana.everynews.app.models.News;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +35,7 @@ public class CategoriesRecycleAdapter extends RecyclerView.Adapter<CategoriesRec
 
         holder.name.setText(item.getName());
         if (position == 0){
-            holder.name.setPaintFlags(holder.name.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+            holder.name.setBackgroundResource(R.drawable.selected_category_item);
         }
     }
 
@@ -49,12 +45,12 @@ public class CategoriesRecycleAdapter extends RecyclerView.Adapter<CategoriesRec
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public Button name;
+        public TextView name;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            name = (Button) itemView.findViewById(R.id.item_category_name);
+            name = (TextView) itemView.findViewById(R.id.item_category_name);
         }
     }
 
