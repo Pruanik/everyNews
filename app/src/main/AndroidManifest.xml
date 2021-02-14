@@ -16,7 +16,7 @@
         <activity
             android:name=".ui.activities.SearchActivity"
             android:label="@string/title_activity_search"
-            android:theme="@style/Theme.EveryNews.NoActionBar"></activity>
+            android:theme="@style/Theme.EveryNews.NoActionBar" />
         <activity android:name=".ui.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

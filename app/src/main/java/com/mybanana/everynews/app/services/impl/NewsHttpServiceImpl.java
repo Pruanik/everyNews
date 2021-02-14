@@ -1,7 +1,7 @@
 package com.mybanana.everynews.app.services.impl;
 
 import com.mybanana.everynews.app.EveryNewsApp;
-import com.mybanana.everynews.app.interactors.NewsCallback;
+import com.mybanana.everynews.app.interactors.ActionCallback;
 import com.mybanana.everynews.app.models.News;
 import com.mybanana.everynews.app.models.NewsPackage;
 import com.mybanana.everynews.api.NewsApi;
@@ -22,7 +22,7 @@ public class NewsHttpServiceImpl implements NewsHttpService {
     }
 
     @Override
-    public void updateTrendsNews(NewsCallback<News> action) {
+    public void updateTrendsNews(ActionCallback<News> action) {
 
         Call<NewsPackage> call = newsClient.getTrendsNews("us");
 
@@ -45,7 +45,7 @@ public class NewsHttpServiceImpl implements NewsHttpService {
     }
 
     @Override
-    public void updateCategoryNews(String category, NewsCallback<News> action) {
+    public void updateCategoryNews(String category, ActionCallback<News> action) {
 
         Call<NewsPackage> call = newsClient.getCategoryNews("us", "business");
 
@@ -68,7 +68,7 @@ public class NewsHttpServiceImpl implements NewsHttpService {
     }
 
     @Override
-    public void searchNews(String query, NewsCallback<News> action) {
+    public void searchNews(String query, ActionCallback<News> action) {
 
         Call<NewsPackage> call = newsClient.searchNews(query);
 

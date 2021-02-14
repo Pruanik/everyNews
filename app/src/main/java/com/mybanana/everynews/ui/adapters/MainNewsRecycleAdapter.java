@@ -126,7 +126,12 @@ public class MainNewsRecycleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
             News item = newsList.get(position - 3);
 
-            Picasso.get().load(item.getUrlToImage()).into(viewHolder.image);
+            Picasso.get()
+                    .load(item.getUrlToImage())
+                    .placeholder(R.drawable.default_image)
+                    .error(R.drawable.default_image)
+                    .into(viewHolder.image);
+
             viewHolder.title.setText(item.getTitle());
             viewHolder.description.setText(item.getDescription());
         }

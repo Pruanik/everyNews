@@ -34,7 +34,12 @@ public class TrendingNewsRecycleAdapter extends RecyclerView.Adapter<TrendingNew
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         News item = newsList.get(position);
 
-        Picasso.get().load(item.getUrlToImage()).into(holder.image);
+        Picasso.get()
+                .load(item.getUrlToImage())
+                .placeholder(R.drawable.default_image)
+                .error(R.drawable.default_image)
+                .into(holder.image);
+
         if(item.getTitle().length() > 45) {
             holder.title.setText(String.format("%s..", item.getTitle().substring(0, 45)));
         } else {

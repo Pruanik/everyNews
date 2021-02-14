@@ -1,23 +1,21 @@
 package com.mybanana.everynews.app.interactors.impl;
 
 import com.mybanana.everynews.app.interactors.ActionCallback;
-import com.mybanana.everynews.app.models.News;
+import com.mybanana.everynews.app.models.Category;
 import com.mybanana.everynews.ui.views.MainView;
 
 import java.util.List;
 
-public class NewsCallbackImpl implements ActionCallback<News> {
+public class CategoriesCallbackImpl implements ActionCallback<Category> {
     MainView view;
 
-    public NewsCallbackImpl(MainView view){
+    public CategoriesCallbackImpl(MainView view){
         this.view = view;
     }
 
     @Override
-    public void updateItems(List<News> items) {
-        view.hideProgress();
-        view.setCategoriesNewsList(items);
-        view.setTrendingNewsList(items);
+    public void updateItems(List<Category> items) {
+        view.setCategoriesList(items);
     }
 
     @Override

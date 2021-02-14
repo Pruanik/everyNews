@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:padding="5dp"
     android:text="@string/recent_news"
-    android:textColor="@color/text_shadow"
+    android:textColor="@color/gray"
     android:textSize="20sp"
     android:textStyle="bold"
     android:layout_marginStart="15dp"
